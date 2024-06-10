@@ -14,7 +14,7 @@ class DarkTextManager extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          color: MarkThirdColor,
+          color: MarkPrimaryColor,
           fontSize: fontSize,
           fontWeight: FontWeight.bold),
     );
@@ -38,3 +38,20 @@ class BrightTextManager extends StatelessWidget {
   }
 }
 
+
+class GoldTextManager extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  const GoldTextManager({super.key, required this.text, required this.fontSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+          color: MarkSecondaryColor,
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold),
+    );
+  }
+}

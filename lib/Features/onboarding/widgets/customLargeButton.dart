@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:to_do_app/core/resources/textManager.dart';
 
 import '../../../core/resources/colorManager.dart';
 
@@ -22,16 +23,13 @@ class CustomLargeButton extends StatelessWidget {
         ]),
         child: MaterialButton(
           onPressed: () {
-            Navigator.of(context).pushNamed("$nextPage");
+            Navigator.of(context).pushNamed(nextPage);
           },
-          child: Text(
-            "$btnName",
-            style: TextStyle(color: MarkPrimaryColor, fontSize: 20),
-          ),
           minWidth: double.infinity,
           height: 60,
           color: MarkThirdColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          child: DarkTextManager(text: btnName, fontSize: 20),
         ),
       ),
     );
