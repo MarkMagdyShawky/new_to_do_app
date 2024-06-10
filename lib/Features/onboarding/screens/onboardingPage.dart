@@ -26,7 +26,7 @@ class OnboardingPage extends StatelessWidget {
                   height: pageHeight,
                   child: Stack(
                     children: [
-                      CustomOnboardingImage(image: ImageManager.HomeBachground,),
+                      CustomOnboardingImage(image: ImageManager.HomeBackground,),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
