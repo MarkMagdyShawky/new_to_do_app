@@ -14,13 +14,13 @@ class HomePageWelcome extends StatelessWidget {
     return Column(
       children: [
         Center(
-          child: DarkTextManager(text: StringManager.OnboardingWelcome, fontSize: 22),
+          child: BrightTextManager(text: StringManager.OnboardingWelcome, fontSize: 22),
         ),
         SizedBox(
           height: 15,
         ),
         Center(
-          child: DarkTextManager(text: StringManager.OnboardingStart, fontSize: 22),
+          child: BrightTextManager(text: StringManager.OnboardingStart, fontSize: 22),
         ),
       ],
     );
