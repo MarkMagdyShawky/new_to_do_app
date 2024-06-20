@@ -13,7 +13,7 @@ class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
   @override
   Widget build(BuildContext context) {
-    double pageHeight =MediaQuery.of(context).size.height;
+    double pageHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: MarkPrimaryColor,
       body: SafeArea(
@@ -26,25 +26,19 @@ class OnboardingPage extends StatelessWidget {
                   height: pageHeight,
                   child: Stack(
                     children: [
-                      CustomOnboardingImage(image: ImageManager.HomeBackground,),
+                      CustomOnboardingImage(
+                        image: ImageManager.HomeBackground,
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                         HomePageWelcome(),
-                          SizedBox(
-                            height: 60,
-                          ),
+                          HomePageWelcome(),
+                          SizedBox(height: 60),
                           CustomLargeButton(btnName: "Login", nextPage: "Login"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Center(
-                            child: BrightTextManager(text: "OR", fontSize: 18)
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
+                          SizedBox(height: 15),
+                          Center(child: BrightTextManager(text: "OR", fontSize: 18)),
+                          SizedBox(height: 15),
                           CustomLargeButton(btnName: "Sign UP", nextPage: "Signup"),
                         ],
                       ),
