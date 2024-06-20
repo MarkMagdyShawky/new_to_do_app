@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginHeader.dart';
 import 'package:to_do_app/Features/onboarding/widgets/customLargeButton.dart';
+import 'package:to_do_app/Features/singup/widgets/customAwesomeDialog.dart';
 import 'package:to_do_app/core/resources/imageManager.dart';
 import 'package:to_do_app/core/resources/stringManager.dart';
 import '../widgets/customLargeDarkButton.dart';
@@ -41,9 +43,23 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (formState.currentState?.validate() ?? false) {
-      Navigator.of(context).pushNamed("Onboarding");
+      try {
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.text,
+          password: password.text,
+        );
+        CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "Onboarding");
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          print("=========>> ${StringManager.userNotFound}");
+          CustomAwesomeDialog().showErrorDialog(context, StringManager.userNotFound);
+        } else if (e.code == 'wrong-password') {
+          print('=========>> ${StringManager.wrongPassword}');
+          CustomAwesomeDialog().showErrorDialog(context, StringManager.wrongPassword);
+        }
+      }
       print('Form is valid');
     } else {
       // If the form is invalid, display the error messages

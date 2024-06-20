@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/login/widgets/customLargeDarkButton.dart';
@@ -8,6 +9,7 @@ import 'package:to_do_app/Features/login/widgets/customLoginFooter.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginHeader.dart';
 import 'package:to_do_app/Features/login/widgets/customTextField.dart';
 import 'package:to_do_app/Features/onboarding/widgets/customLargeButton.dart';
+import 'package:to_do_app/Features/singup/widgets/customAwesomeDialog.dart';
 import 'package:to_do_app/core/resources/imageManager.dart';
 import 'package:to_do_app/core/resources/stringManager.dart';
 
@@ -48,23 +50,31 @@ class _SignupPageState extends State<SignupPage> {
     focusNode3.dispose();
     super.dispose();
   }
-  void _submitForm() {
+
+  void _submitForm() async {
     if (formState.currentState?.validate() ?? false) {
-      AwesomeDialog(
-        btnOkIcon: CupertinoIcons.airplane,
-        showCloseIcon: true,
-        context: context,
-        dialogType: DialogType.info,
-        animType: AnimType.scale,
-        title: 'Success',
-        desc: 'Login Successsflly',
-        btnOkOnPress: () {Navigator.of(context).pushNamed("Login");},
-      ).show();
-
-
-      print('Form is valid');
+      try {
+        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.text,
+          password: password.text,
+        );
+        CustomAwesomeDialog().showSuccessDialog(context, StringManager.signinSucc, "Login");
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('=========>> ${StringManager.weakPassword}');
+          CustomAwesomeDialog().showInfoDialog(context, StringManager.alert, StringManager.weakPassword);
+        } else if (e.code == 'email-already-in-use') {
+          print('=========>> ${StringManager.emailAlreadyExist}.');
+          CustomAwesomeDialog().showInfoDialog(context, StringManager.alert, StringManager.emailAlreadyExist);
+        } else if (e.code == 'invalid-email') {
+          print('=========>> The email address is not valid.');
+          CustomAwesomeDialog().showInfoDialog(context, StringManager.alert, StringManager.emailBadlyFormat);
+        }
+      } catch (e) {
+        print(e);
+        CustomAwesomeDialog().showInfoDialog(context, StringManager.alert, StringManager.errorMessage);
+      }
     } else {
-      // If the form is invalid, display the error messages
       print('Form is invalid');
     }
   }
@@ -117,7 +127,10 @@ class _SignupPageState extends State<SignupPage> {
                           height: 30,
                         ),
                         CustomLargeDarkButton(
-                            btnName: StringManager.SignupBtnName, nextPage: "Login",onPressed: _submitForm,)
+                          btnName: StringManager.SignupBtnName,
+                          nextPage: "Login",
+                          onPressed: _submitForm,
+                        )
                       ],
                     )),
               ),
@@ -136,4 +149,3 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
-

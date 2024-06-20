@@ -12,6 +12,17 @@ class StringManager {
 
   static const String signupTitle = "Welcome";
   static const String signupSubtitle = "Create new account now";
-  static const String usernameHint = "Email";
+  static const String usernameHint = "Username";
   static const String signupFooterQ = "Already have an account?";
+
+  static const String alert = "Alert";
+  static const String weakPassword = "The password provided is too weak";
+  static const String emailAlreadyExist = "The account already exists for that email";
+  static const String errorMessage = "Something went wrong";
+  static const String emailBadlyFormat = "The email address is badly formatted";
+  static const String loginSucc = "Login Successfully";
+  static const String signinSucc = "Sign in Successfully";
+
+  static const String userNotFound = "No user found for that email.";
+  static const String wrongPassword = "Wrong password provided for that user.";
 }
