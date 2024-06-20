@@ -2,6 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:to_do_app/Features/login/widgets/customGoogleBtn.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginHeader.dart';
 import 'package:to_do_app/Features/onboarding/widgets/customLargeButton.dart';
 import 'package:to_do_app/Features/singup/widgets/customAwesomeDialog.dart';
@@ -67,6 +70,30 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  //////****Login With Google Account*******/////
+  Future signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    if (googleUser == null) {
+      return; // if user enter null value or cancel login will get out
+    }
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance.signInWithCredential(credential);
+    // if login success show diagonal from package
+    setState(() {
+      CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "Onboarding");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,9 +142,13 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 30),
                 // Login Footer
                 CustomLoginFooter(
-                    question: StringManager.LoginFooterQ,
-                    nextPage: "Signup",
-                    btnName: StringManager.SignupBtnName),
+                  question: StringManager.LoginFooterQ,
+                  nextPage: "Signup",
+                  btnName: StringManager.SignupBtnName,
+                ),
+                CustomGoogleBtn(
+                  signInWithGoogle: signInWithGoogle,
+                ),
               ],
             ),
           ),
