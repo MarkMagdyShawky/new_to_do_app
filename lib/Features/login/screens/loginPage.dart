@@ -41,28 +41,37 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  void _submitForm() {
+    if (formState.currentState?.validate() ?? false) {
+      Navigator.of(context).pushNamed("Onboarding");
+      print('Form is valid');
+    } else {
+      // If the form is invalid, display the error messages
+      print('Form is invalid');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        Container(
-          padding: EdgeInsets.only(top: 40, bottom: 40),
-          child: Column(
-            children: [
-              // Login Header
-              CustomLoginHeader(
-                  pageTitle: StringManager.LoginTitle,
-                  imageLocation: ImageManager.LoginImage,
-                  subtitle: StringManager.LoginSubtitle),
-              // Login Buttons
-              Container(
-                child: Form(
+      body: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: 40, bottom: 40),
+            child: Column(
+              children: [
+                // Login Header
+                CustomLoginHeader(
+                    pageTitle: StringManager.LoginTitle,
+                    imageLocation: ImageManager.LoginImage,
+                    subtitle: StringManager.LoginSubtitle),
+                // Login Buttons
+                Container(
+                  child: Form(
                     key: formState,
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SizedBox(height: 30),
                         CustomTextField(
                           textName: "email",
                           controllerName: email,
@@ -77,25 +86,27 @@ class _LoginPageState extends State<LoginPage> {
                           focusNode: focusNode2,
                           iconss: Icons.password,
                         ),
-                        SizedBox(
-                          height: 30,
+                        SizedBox(height: 30),
+                        CustomLargeDarkButton(
+                          btnName: StringManager.LoginBtnName,
+                          nextPage: "ToDoHome",
+                          onPressed: _submitForm,
                         ),
-                        CustomLargeDarkButton(btnName: StringManager.LoginBtnName, nextPage: "ToDoHome")
                       ],
-                    )),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              // Login Footer
-              CustomLoginFooter(
-                  question: StringManager.LoginFooterQ,
-                  nextPage: "Signup",
-                  btnName: StringManager.SignupBtnName)
-            ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                // Login Footer
+                CustomLoginFooter(
+                    question: StringManager.LoginFooterQ,
+                    nextPage: "Signup",
+                    btnName: StringManager.SignupBtnName),
+              ],
+            ),
           ),
-        )
-      ]),
+        ],
+      ),
     );
   }
 }

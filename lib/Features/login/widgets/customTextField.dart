@@ -32,6 +32,9 @@ class CustomTextField extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter your $textName';
           }
+          if (textName == "password" && value!.length < 7) {
+            return 'Please password must by more than 7 characters';
+          }
           return null;
         },
         decoration: InputDecoration(

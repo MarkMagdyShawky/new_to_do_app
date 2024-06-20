@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:to_do_app/core/resources/textManager.dart';
 
@@ -7,7 +9,9 @@ import '../../../core/resources/colorManager.dart';
 class CustomLargeDarkButton extends StatelessWidget {
   final String btnName;
   final String nextPage;
-  CustomLargeDarkButton({required this.btnName, required this.nextPage});
+  final VoidCallback? onPressed;
+
+  CustomLargeDarkButton({required this.btnName, required this.nextPage, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +26,12 @@ class CustomLargeDarkButton extends StatelessWidget {
           ),
         ]),
         child: MaterialButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(nextPage);
-          },
-          child: BrightTextManager(text: btnName, fontSize: 20),
+          onPressed: onPressed,
           minWidth: double.infinity,
           height: 60,
           color: MarkPrimaryColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          child: BrightTextManager(text: btnName, fontSize: 20),
         ),
       ),
     );

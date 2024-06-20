@@ -45,7 +45,7 @@ class OnboardingPage extends StatelessWidget {
                           SizedBox(
                             height: 15,
                           ),
-                          CustomLargeButton(btnName: "Sign UP", nextPage: "SignUp"),
+                          CustomLargeButton(btnName: "Sign UP", nextPage: "Signup"),
                         ],
                       ),
                     ],
