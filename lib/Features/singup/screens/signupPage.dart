@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/login/widgets/customLargeDarkButton.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginFooter.dart';
@@ -45,6 +47,26 @@ class _SignupPageState extends State<SignupPage> {
     focusNode2.dispose();
     focusNode3.dispose();
     super.dispose();
+  }
+  void _submitForm() {
+    if (formState.currentState?.validate() ?? false) {
+      AwesomeDialog(
+        btnOkIcon: CupertinoIcons.airplane,
+        showCloseIcon: true,
+        context: context,
+        dialogType: DialogType.info,
+        animType: AnimType.scale,
+        title: 'Success',
+        desc: 'Login Successsflly',
+        btnOkOnPress: () {Navigator.of(context).pushNamed("Login");},
+      ).show();
+
+
+      print('Form is valid');
+    } else {
+      // If the form is invalid, display the error messages
+      print('Form is invalid');
+    }
   }
 
   @override
@@ -95,7 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                           height: 30,
                         ),
                         CustomLargeDarkButton(
-                            btnName: StringManager.SignupBtnName, nextPage: "Login")
+                            btnName: StringManager.SignupBtnName, nextPage: "Login",onPressed: _submitForm,)
                       ],
                     )),
               ),
@@ -114,3 +136,4 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
+
