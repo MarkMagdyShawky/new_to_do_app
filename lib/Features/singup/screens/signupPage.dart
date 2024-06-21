@@ -8,7 +8,6 @@ import 'package:to_do_app/Features/login/widgets/customLargeDarkButton.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginFooter.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginHeader.dart';
 import 'package:to_do_app/Features/login/widgets/customTextField.dart';
-import 'package:to_do_app/Features/onboarding/widgets/customLargeButton.dart';
 import 'package:to_do_app/Features/singup/widgets/customAwesomeDialog.dart';
 import 'package:to_do_app/core/resources/imageManager.dart';
 import 'package:to_do_app/core/resources/stringManager.dart';
@@ -139,9 +138,10 @@ class _SignupPageState extends State<SignupPage> {
               ),
               // Login Footer
               CustomLoginFooter(
-                  question: StringManager.signupFooterQ,
-                  nextPage: "Login",
-                  btnName: StringManager.LoginBtnName)
+                question: StringManager.signupFooterQ,
+                nextPage: "Login",
+                btnName: StringManager.LoginBtnName,
+              )
             ],
           ),
         )

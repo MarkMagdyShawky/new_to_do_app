@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           email: email.text,
           password: password.text,
         );
-        CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "Onboarding");
+        CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "ToDoHome");
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print("=========>> ${StringManager.userNotFound}");
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     await FirebaseAuth.instance.signInWithCredential(credential);
     // if login success show diagonal from package
     setState(() {
-      CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "Onboarding");
+      CustomAwesomeDialog().showSuccessDialog(context, StringManager.loginSucc, "ToDoHome");
     });
   }
 
