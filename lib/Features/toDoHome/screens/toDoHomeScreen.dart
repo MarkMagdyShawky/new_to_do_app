@@ -1,7 +1,12 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/toDoHome/widgets/customFinalCard.dart';
 import 'package:to_do_app/Features/toDoHome/widgets/customTaskCard.dart';
 import 'package:to_do_app/core/resources/MarkDrawer.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
+import 'package:to_do_app/core/resources/imageManager.dart';
+import 'package:to_do_app/core/resources/stringManager.dart';
 
 class ToDoHomeScreen extends StatefulWidget {
   const ToDoHomeScreen({super.key});
@@ -30,9 +35,7 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
           ClipRRect(
             borderRadius:
                 BorderRadius.only(bottomLeft: Radius.circular(300), bottomRight: Radius.circular(300)),
-            child: Image.asset(
-              'assets/bg27.png',
-            ),
+            child: Image.asset(ImageManager.toDoHomeBackground),
           ),
 
           Container(
@@ -40,9 +43,8 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
               top: 30,
             ),
             alignment: Alignment.topCenter,
-            // color: MarkSecondaryColor,
             child: Text(
-              "Wellcome to your Tasks",
+              StringManager.toDoHomeTitle,
               style: TextStyle(fontSize: 26, color: MarkBackgroundColor, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
               textDirection: TextDirection.ltr,
@@ -55,14 +57,12 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 crossAxisCount: 2, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
             children: [
               // Cards:
-
               // Personal card tasks
               CustomTaskCard(
                 mainTitle: "Personal",
                 div: "5/5",
                 precentage: 1,
-                image: "personal",
-                nextPage: "ToDoTasks",
+                image: ImageManager.personalCard,
               ),
 
               // Work card tasks
@@ -70,33 +70,26 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 mainTitle: "Work",
                 div: "1/4",
                 precentage: 0.25,
-                image: "work",
-                nextPage: "ToDoTasks",
+                image: ImageManager.workCard,
               ),
 
               // Daily card tasks
-
               CustomTaskCard(
                 mainTitle: "Daily",
                 div: "3/6",
                 precentage: 0.5,
-                image: "calendar",
-                nextPage: "ToDoTasks",
+                image: ImageManager.calendarCard,
               ),
 
               // Shopping card tasks
-
               CustomTaskCard(
                 mainTitle: "Shopping",
                 div: "1/6",
                 precentage: 0.166,
-                image: "shopping",
-                nextPage: "ToDoTasks",
+                image: ImageManager.shoppingCard,
               ),
 
-              // finalTaskCard(
-              //   nextPage: "ToDoTasks",
-              // ),
+              CustomFinalCard(),
             ],
           ),
         ],

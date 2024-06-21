@@ -1,22 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:to_do_app/core/resources/imageManager.dart';
 
-class CustomTaskCard extends StatelessWidget {
-  final String mainTitle;
-  final String div;
-  final double precentage;
-  final String image;
-
-  const CustomTaskCard({
+class CustomFinalCard extends StatelessWidget {
+  const CustomFinalCard({
     super.key,
-    required this.mainTitle,
-    required this.div,
-    required this.precentage,
-    required this.image,
   });
 
   @override
@@ -31,25 +21,26 @@ class CustomTaskCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Column(
           children: [
-            SizedBox(height: 5),
+            SizedBox(
+              height: 20,
+            ),
             SvgPicture.asset(
-              image,
+              ImageManager.finalCard,
               height: 40,
               width: 40,
             ),
-            SizedBox(height: 7),
+            SizedBox(
+              height: 7,
+            ),
             Text(
-              mainTitle,
+              "Done",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: MarkPrimaryColor),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 7),
-            Text(
-              div,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: MarkPrimaryColor),
-              textAlign: TextAlign.center,
+            SizedBox(
+              height: 7,
             ),
-            SizedBox(height: 10),
+
             //Linear Indicator
             LinearPercentIndicator(
               alignment: MainAxisAlignment.center,
@@ -58,8 +49,8 @@ class CustomTaskCard extends StatelessWidget {
               animation: true,
               lineHeight: 20.0,
               animationDuration: 2000,
-              percent: precentage,
-              progressColor: MarkSecondaryColor,
+              percent: 1,
+              progressColor: Colors.lightGreenAccent,
             ),
           ],
         ),
