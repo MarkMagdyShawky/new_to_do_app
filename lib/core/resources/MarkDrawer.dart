@@ -2,7 +2,9 @@
 
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
 
 class MarkDrawer extends StatelessWidget {
@@ -11,7 +13,6 @@ class MarkDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      shadowColor: MarkPrimaryColor,
       elevation: 3,
       semanticLabel: NativeRuntime.buildId,
       backgroundColor: MarkBackgroundColor,
@@ -31,7 +32,9 @@ class MarkDrawer extends StatelessWidget {
               "Home",
               style: TextStyle(color: MarkPrimaryColor, fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, "ToDoHome");
+            },
           ),
           ListTile(
             leading: Icon(
@@ -53,7 +56,23 @@ class MarkDrawer extends StatelessWidget {
               "Logout",
               style: TextStyle(color: MarkPrimaryColor, fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            onTap: () {},
+            onTap: () async {
+              FirebaseAuth auth = FirebaseAuth.instance;
+              User? user = auth.currentUser;
+
+              try {
+                if (user != null && !user.isAnonymous) {
+                  if (user.providerData.any((userInfo) => userInfo.providerId == 'google.com')) {
+                    GoogleSignIn googleSignIn = GoogleSignIn();
+                    await googleSignIn.disconnect();
+                  }
+                }
+              } catch (e) {
+                print('Error disconnecting Google account: $e');
+              }
+              await auth.signOut();
+              Navigator.popAndPushNamed(context, "Login");
+            },
           )
         ],
       ),
