@@ -10,6 +10,7 @@ class CustomTaskCard extends StatelessWidget {
   final String div;
   final double precentage;
   final String image;
+  final String nextPage;
 
   const CustomTaskCard({
     super.key,
@@ -17,6 +18,7 @@ class CustomTaskCard extends StatelessWidget {
     required this.div,
     required this.precentage,
     required this.image,
+    required this.nextPage,
   });
 
   @override
@@ -64,7 +66,7 @@ class CustomTaskCard extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.of(context).pushNamed("Onboarding");
+          Navigator.of(context).pushNamed(nextPage);
         },
       ),
     );

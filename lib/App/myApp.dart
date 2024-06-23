@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/core/resources/colorManager.dart';
 import 'package:to_do_app/core/resources/routsManager.dart';
 
 class MyApp extends StatefulWidget {
@@ -28,8 +29,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(fontFamily: "Acme-Regular"),
       debugShowCheckedModeBanner: false,
+      color: MarkBackgroundColor,
       routes: RoutManager.PageRoute,
-      initialRoute: "Onboarding",
+      initialRoute: (FirebaseAuth.instance.currentUser != null) ? "ToDoHome" : "Onboarding",
     );
   }
 }
