@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
-import 'package:to_do_app/core/resources/textManager.dart';
 
 class CustomTextFiled extends StatelessWidget {
   final TextEditingController taskNameController;

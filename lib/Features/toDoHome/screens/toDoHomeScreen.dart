@@ -63,7 +63,8 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 div: "5/5",
                 precentage: 1,
                 image: ImageManager.personalCard,
-                nextPage: "PersonalTasks",
+                pageName: 'Personal Tasks',
+                collectionName: 'PersonalTasks',
               ),
 
               // Work card tasks
@@ -72,7 +73,8 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 div: "1/4",
                 precentage: 0.25,
                 image: ImageManager.workCard,
-                nextPage: "PersonalTasks",
+                pageName: 'Work Tasks',
+                collectionName: 'WorkTasks',
               ),
 
               // Daily card tasks
@@ -81,7 +83,8 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 div: "3/6",
                 precentage: 0.5,
                 image: ImageManager.calendarCard,
-                nextPage: "PersonalTasks",
+                pageName: 'Daily Tasks',
+                collectionName: 'DailyTasks',
               ),
 
               // Shopping card tasks
@@ -90,7 +93,8 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
                 div: "1/6",
                 precentage: 0.166,
                 image: ImageManager.shoppingCard,
-                nextPage: "PersonalTasks",
+                pageName: 'Shopping',
+                collectionName: 'ShoppingTasks',
               ),
 
               CustomFinalCard(),

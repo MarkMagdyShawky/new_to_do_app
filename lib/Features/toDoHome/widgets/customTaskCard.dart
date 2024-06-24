@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:to_do_app/Features/tasks/screens/tasksPage.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -10,7 +11,8 @@ class CustomTaskCard extends StatelessWidget {
   final String div;
   final double precentage;
   final String image;
-  final String nextPage;
+  final String pageName;
+  final String collectionName;
 
   const CustomTaskCard({
     super.key,
@@ -18,7 +20,8 @@ class CustomTaskCard extends StatelessWidget {
     required this.div,
     required this.precentage,
     required this.image,
-    required this.nextPage,
+    required this.pageName,
+    required this.collectionName,
   });
 
   @override
@@ -66,7 +69,12 @@ class CustomTaskCard extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.of(context).pushNamed(nextPage);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TasksPage(collectionName: collectionName, currentPageName: pageName),
+            ),
+          );
         },
       ),
     );
