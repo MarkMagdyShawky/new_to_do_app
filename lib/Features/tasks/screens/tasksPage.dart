@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
 import 'package:to_do_app/Features/tasks/widgets/customListTitleWidget.dart';
@@ -23,11 +24,13 @@ class _TasksPage extends State<TasksPage> {
 
   List<QueryDocumentSnapshot> data = [];
   List<bool> dataCheck = [];
-
+  late CollectionReference tasks;
+  // late CollectionReference doneTasks;
   @override
   void initState() {
     super.initState();
     getData();
+    tasks = FirebaseFirestore.instance.collection(widget.collectionName);
   }
 
   getData() async {
@@ -43,9 +46,28 @@ class _TasksPage extends State<TasksPage> {
     });
   }
 
+  updateCheckedValue(int index) async {
+    String docId = data[index].id;
+
+    await tasks.doc(docId).update(
+      {
+        'isChecked': dataCheck[index],
+      },
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            TasksPage(collectionName: widget.collectionName, currentPageName: widget.collectionName),
+      ),
+    );
+  }
+
   void _handleCheckboxChange(int index) {
     setState(() {
       dataCheck[index] = !dataCheck[index];
+      updateCheckedValue(index);
     });
   }
 
