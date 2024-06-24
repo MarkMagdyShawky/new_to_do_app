@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
 import 'package:to_do_app/Features/tasks/widgets/customListTitleWidget.dart';
@@ -10,36 +9,27 @@ import 'package:to_do_app/core/resources/MarkDrawer.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
 import 'package:to_do_app/core/resources/textManager.dart';
 
-class TasksPage extends StatefulWidget {
-  final String collectionName;
-  final String currentPageName;
-  const TasksPage({super.key, required this.collectionName, required this.currentPageName});
+class DoneTasks extends StatefulWidget {
+  const DoneTasks({super.key});
 
   @override
-  State<TasksPage> createState() => _TasksPage();
+  State<DoneTasks> createState() => _DoneTasks();
 }
 
-class _TasksPage extends State<TasksPage> {
+class _DoneTasks extends State<DoneTasks> {
   bool isLoading = true;
 
   List<QueryDocumentSnapshot> data = [];
   List<bool> dataCheck = [];
-  late CollectionReference tasks;
-  late CollectionReference doneTasks;
+
   @override
   void initState() {
     super.initState();
     getData();
-    tasks = FirebaseFirestore.instance.collection(widget.collectionName);
-    doneTasks = FirebaseFirestore.instance.collection('DoneTasks');
   }
 
   getData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection(widget.collectionName)
-        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .where('isChecked', isEqualTo: false)
-        .get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('DoneTasks').get();
     setState(() {
       data = querySnapshot.docs;
       dataCheck = List.filled(data.length, false);
@@ -47,34 +37,9 @@ class _TasksPage extends State<TasksPage> {
     });
   }
 
-  updateCheckedValue(int index) async {
-    String docId = data[index].id;
-
-    await tasks.doc(docId).update(
-      {
-        'isChecked': dataCheck[index],
-      },
-    );
-    DocumentReference response = await doneTasks.add({
-      "taskName": data[index]['taskName'],
-      "taskDescription": data[index]['taskDescription'],
-      "isChecked": true,
-      "id": FirebaseAuth.instance.currentUser!.uid,
-      "timestamp": FieldValue.serverTimestamp(),
-    });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            TasksPage(collectionName: widget.collectionName, currentPageName: widget.collectionName),
-      ),
-    );
-  }
-
   void _handleCheckboxChange(int index) {
     setState(() {
       dataCheck[index] = !dataCheck[index];
-      updateCheckedValue(index);
     });
   }
 
@@ -88,14 +53,14 @@ class _TasksPage extends State<TasksPage> {
         elevation: 0,
         backgroundColor: MarkBackgroundColor,
         title: DarkTextManager(
-          text: widget.currentPageName,
+          text: 'Finished Tasks',
           fontSize: 25,
         ),
         centerTitle: true,
         toolbarHeight: 80,
         iconTheme: IconThemeData(color: MarkPrimaryColor, weight: 600, size: 30),
       ),
-      floatingActionButton: CustomFloatingActionButton(collectionName: widget.collectionName),
+      floatingActionButton: CustomFloatingActionButton(collectionName: 'DoneTasks'),
       drawer: MarkDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -128,15 +93,13 @@ class _TasksPage extends State<TasksPage> {
                             },
                             btnOkOnPress: () async {
                               await FirebaseFirestore.instance
-                                  .collection(widget.collectionName)
+                                  .collection('DoneTasks')
                                   .doc(data[i].id)
                                   .delete();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TasksPage(
-                                      collectionName: widget.collectionName,
-                                      currentPageName: widget.collectionName),
+                                  builder: (context) => DoneTasks(),
                                 ),
                               );
                             },
