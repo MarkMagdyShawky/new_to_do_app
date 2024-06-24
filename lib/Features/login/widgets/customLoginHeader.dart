@@ -26,9 +26,6 @@ class CustomLoginHeader extends StatelessWidget {
           width: 400,
           height: 350,
         ),
-        SizedBox(
-          height: 10,
-        ),
         DarkTextManager(text: subtitle, fontSize: 18),
       ],
     );

@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: formState,
                     child: Column(
                       children: [
-                        SizedBox(height: 30),
+                        SizedBox(height: 10),
                         CustomTextField(
                           textName: "email",
                           controllerName: email,
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                           focusNode: focusNode2,
                           iconss: Icons.password,
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         CustomLargeDarkButton(
                           btnName: StringManager.LoginBtnName,
                           nextPage: "ToDoHome",
@@ -139,15 +139,16 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
+                CustomGoogleBtn(
+                  signInWithGoogle: signInWithGoogle,
+                ),
+                SizedBox(height: 10),
                 // Login Footer
                 CustomLoginFooter(
                   question: StringManager.LoginFooterQ,
                   nextPage: "Signup",
                   btnName: StringManager.SignupBtnName,
-                ),
-                CustomGoogleBtn(
-                  signInWithGoogle: signInWithGoogle,
                 ),
               ],
             ),

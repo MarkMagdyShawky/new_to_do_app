@@ -11,11 +11,10 @@ class CustomGoogleBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: signInWithGoogle,
-      color: Color.fromARGB(255, 255, 118, 108),
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
-      height: 30,
-      minWidth: 255,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
+      color: Color.fromARGB(255, 255, 78, 66),
+      height: 55,
+      minWidth: 270,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
