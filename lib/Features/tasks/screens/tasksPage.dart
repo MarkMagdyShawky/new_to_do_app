@@ -20,15 +20,9 @@ class TasksPage extends StatefulWidget {
 
 class _TasksPage extends State<TasksPage> {
   bool isLoading = true;
-  bool _isChecked = false;
-
-  void _handleCheckboxChange() {
-    setState(() {
-      _isChecked = !_isChecked;
-    });
-  }
 
   List<QueryDocumentSnapshot> data = [];
+  List<bool> dataCheck = [];
 
   @override
   void initState() {
@@ -44,7 +38,14 @@ class _TasksPage extends State<TasksPage> {
         .get();
     setState(() {
       data = querySnapshot.docs;
+      dataCheck = List.filled(data.length, false);
       isLoading = false;
+    });
+  }
+
+  void _handleCheckboxChange(int index) {
+    setState(() {
+      dataCheck[index] = !dataCheck[index];
     });
   }
 
@@ -80,8 +81,8 @@ class _TasksPage extends State<TasksPage> {
                     itemCount: data.length,
                     itemBuilder: (context, i) {
                       return CustomListTitle(
-                        handleCheckboxChange: _handleCheckboxChange,
-                        isChecked: _isChecked,
+                        handleCheckboxChange: () => _handleCheckboxChange(i),
+                        isChecked: dataCheck[i],
                         taskName: data[i]["taskName"],
                         description: data[i]["taskDescription"],
                         onPressed: () {
