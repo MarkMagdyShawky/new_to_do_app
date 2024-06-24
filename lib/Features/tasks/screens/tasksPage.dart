@@ -1,4 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
 import 'package:to_do_app/Features/tasks/widgets/customListTitleWidget.dart';
@@ -63,19 +65,47 @@ class _TasksPage extends State<TasksPage> {
         child: data.isEmpty
             ? Center(child: CircularProgressIndicator())
             : ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(
-            height: 30,
-          ),
-          itemCount: data.length,
-          itemBuilder: (context, i) {
-            return CustomListTitle(
-              handleCheckboxChange: _handleCheckboxChange,
-              isChecked: _isChecked,
-              taskName: data[i]["taskName"],
-              description: data[i]["taskDescription"],
-            );
-          },
-        ),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 30,
+                ),
+                itemCount: data.length,
+                itemBuilder: (context, i) {
+                  return CustomListTitle(
+                    handleCheckboxChange: _handleCheckboxChange,
+                    isChecked: _isChecked,
+                    taskName: data[i]["taskName"],
+                    description: data[i]["taskDescription"],
+                    onPressed: () {
+                      AwesomeDialog(
+                        btnOkIcon: CupertinoIcons.airplane,
+                        showCloseIcon: true,
+                        context: context,
+                        dialogType: DialogType.info,
+                        animType: AnimType.scale,
+                        title: 'Alert',
+                        desc: "Delete task?",
+                        btnCancelOnPress: () {
+                          print("cancele");
+                        },
+                        btnOkOnPress: () async {
+                          await FirebaseFirestore.instance
+                              .collection(widget.collectionName)
+                              .doc(data[i].id)
+                              .delete();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TasksPage(
+                                  collectionName: widget.collectionName,
+                                  currentPageName: widget.collectionName),
+                            ),
+                          );
+                        },
+                      ).show();
+                    },
+                  );
+                },
+              ),
       ),
     );
   }

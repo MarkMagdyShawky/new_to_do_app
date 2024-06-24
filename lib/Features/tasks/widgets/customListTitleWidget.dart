@@ -5,15 +5,16 @@ import 'package:to_do_app/core/resources/textManager.dart';
 class CustomListTitle extends StatelessWidget {
   final VoidCallback? handleCheckboxChange;
   final bool isChecked;
-
   final String taskName;
   final String description;
+  final VoidCallback? onPressed;
   const CustomListTitle({
     super.key,
     required this.handleCheckboxChange,
     required this.isChecked,
     required this.taskName,
     required this.description,
+    this.onPressed,
   });
 
   @override
@@ -52,7 +53,7 @@ class CustomListTitle extends StatelessWidget {
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: onPressed,
               icon: Icon(
                 Icons.close,
               ),
