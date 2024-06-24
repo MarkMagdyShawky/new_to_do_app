@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
@@ -18,6 +19,7 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPage extends State<TasksPage> {
+  bool isLoading = true;
   bool _isChecked = false;
 
   void _handleCheckboxChange() {
@@ -35,9 +37,14 @@ class _TasksPage extends State<TasksPage> {
   }
 
   getData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection(widget.collectionName).get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection(widget.collectionName)
+        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('isChecked', isEqualTo: false)
+        .get();
     setState(() {
       data = querySnapshot.docs;
+      isLoading = false;
     });
   }
 
@@ -62,50 +69,52 @@ class _TasksPage extends State<TasksPage> {
       drawer: MarkDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: data.isEmpty
+        child: isLoading
             ? Center(child: CircularProgressIndicator())
-            : ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(
-                  height: 30,
-                ),
-                itemCount: data.length,
-                itemBuilder: (context, i) {
-                  return CustomListTitle(
-                    handleCheckboxChange: _handleCheckboxChange,
-                    isChecked: _isChecked,
-                    taskName: data[i]["taskName"],
-                    description: data[i]["taskDescription"],
-                    onPressed: () {
-                      AwesomeDialog(
-                        btnOkIcon: CupertinoIcons.airplane,
-                        showCloseIcon: true,
-                        context: context,
-                        dialogType: DialogType.info,
-                        animType: AnimType.scale,
-                        title: 'Alert',
-                        desc: "Delete task?",
-                        btnCancelOnPress: () {
-                          print("cancele");
+            : data.isEmpty
+                ? Center(child: DarkTextManager(text: "No tasks yet", fontSize: 30))
+                : ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 30,
+                    ),
+                    itemCount: data.length,
+                    itemBuilder: (context, i) {
+                      return CustomListTitle(
+                        handleCheckboxChange: _handleCheckboxChange,
+                        isChecked: _isChecked,
+                        taskName: data[i]["taskName"],
+                        description: data[i]["taskDescription"],
+                        onPressed: () {
+                          AwesomeDialog(
+                            btnOkIcon: CupertinoIcons.airplane,
+                            showCloseIcon: true,
+                            context: context,
+                            dialogType: DialogType.info,
+                            animType: AnimType.scale,
+                            title: 'Alert',
+                            desc: "Delete task?",
+                            btnCancelOnPress: () {
+                              print("cancele");
+                            },
+                            btnOkOnPress: () async {
+                              await FirebaseFirestore.instance
+                                  .collection(widget.collectionName)
+                                  .doc(data[i].id)
+                                  .delete();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TasksPage(
+                                      collectionName: widget.collectionName,
+                                      currentPageName: widget.collectionName),
+                                ),
+                              );
+                            },
+                          ).show();
                         },
-                        btnOkOnPress: () async {
-                          await FirebaseFirestore.instance
-                              .collection(widget.collectionName)
-                              .doc(data[i].id)
-                              .delete();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TasksPage(
-                                  collectionName: widget.collectionName,
-                                  currentPageName: widget.collectionName),
-                            ),
-                          );
-                        },
-                      ).show();
+                      );
                     },
-                  );
-                },
-              ),
+                  ),
       ),
     );
   }
