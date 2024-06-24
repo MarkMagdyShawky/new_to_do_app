@@ -33,7 +33,7 @@ class MarkDrawer extends StatelessWidget {
               style: TextStyle(color: MarkPrimaryColor, fontSize: 16, fontWeight: FontWeight.bold),
             ),
             onTap: () {
-              Navigator.pushNamed(context, "ToDoHome");
+              Navigator.popAndPushNamed(context, "ToDoHome");
             },
           ),
           ListTile(

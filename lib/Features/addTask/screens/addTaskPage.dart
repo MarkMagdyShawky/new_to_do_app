@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/addTask/widgets/customAddButton.dart';
@@ -34,6 +35,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
           "taskName": taskName.text,
           "taskDescription": taskDescription.text,
           "isChecked": isChecked,
+          "id": FirebaseAuth.instance.currentUser!.uid,
           "timestamp": FieldValue.serverTimestamp(),
         });
         showSuccessDialog(context);
@@ -100,12 +102,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
       title: 'Success',
       desc: "Task Added Successfully",
       btnOkOnPress: () {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) =>
                 TasksPage(collectionName: widget.collectionName, currentPageName: widget.collectionName),
           ),
+          (route) => false,
         );
       },
     ).show();
