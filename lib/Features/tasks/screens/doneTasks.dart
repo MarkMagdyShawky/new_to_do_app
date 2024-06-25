@@ -96,6 +96,11 @@ class _DoneTasks extends State<DoneTasks> {
                                   .collection('DoneTasks')
                                   .doc(data[i].id)
                                   .delete();
+
+                              await FirebaseFirestore.instance
+                                  .collection(data[i]['oldCollection'])
+                                  .doc(data[i].id)
+                                  .delete();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
