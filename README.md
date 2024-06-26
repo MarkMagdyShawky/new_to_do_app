@@ -16,22 +16,21 @@
 - **Completed Tasks:** the app have separated part for completed tasks.
   
 ## How to Use
-- Download and Install: Ensure you have Flutter installed. Clone the repository and install dependencies.
-- Register/Login: Create a new account or login using your existing credentials or Google account.
-- Add Tasks: Navigate to the desired category and add new tasks.
-- Manage Tasks: Mark tasks as done, edit, or delete them as necessary.
-- View Completed Tasks: Check completed tasks in the 'DoneTasks' collection.
+- **Download and Install:** Ensure you have Flutter installed. Clone the repository and install dependencies.
+- **Register/Login:** Create a new account or login using your existing credentials or Google account.
+- **Add Tasks:** Navigate to the desired category and add new tasks.
+- **Manage Tasks:** Mark tasks as done, or delete them as necessary.
+- **View Completed Tasks:** Check completed tasks in the 'DoneTasks' collection.
   
 
 ## Dependencies
-- Flutter: For building the user interface.
-- Dart: Programming language for Flutter.
-- Firebase: Backend services for data storage and authentication.
-- Authentication: Secure user login and registration.
-- Flutter Animation: Enhanced UI/UX with smooth animations.
+- **Flutter:** For building the user interface.
+- **Dart:** Programming language for Flutter.
+- **Firebase:** Backend services for data storage and authentication.
+- **Authentication:** Secure user login and registration.
+- **Flutter Animation:** Enhanced UI/UX with smooth animations.
 
 ## Future Work
-- Task Reminders: Implement reminders and notifications for pending tasks.
-- Dark Mode: Introduce a dark mode for better user experience.
-- Task Sharing: Allow users to share tasks with others.
-- Analytics: Integrate analytics to track user interaction and improve app functionality.
+- **Task Reminders:** Implement reminders and notifications for pending tasks.
+- **Dark Mode:** Introduce a dark mode for better user experience.
+- **Task Sharing:** Allow users to share tasks with others.
