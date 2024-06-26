@@ -4,9 +4,10 @@
 
 | Image 1 | Image 2 |
 |---------|---------|
-    |-----------|
 | ![Image 1](./appPhotos/ToDo2.png) | ![Image 2](./appPhotos/ToDo3.png) |
-|![Image 1](./appPhotos/ToDo2.png)|
+    | Image 1 |
+    |---------|
+| ![Image 1](./appPhotos/ToDo4.png) |
  ### To Do appliction to manage your tasks
 
 ## Features
