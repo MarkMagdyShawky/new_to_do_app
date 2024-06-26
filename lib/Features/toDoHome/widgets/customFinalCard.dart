@@ -25,10 +25,10 @@ class CustomFinalCard extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            SvgPicture.asset(
-              ImageManager.finalCard,
-              height: 40,
+            Image(
+              image: AssetImage(ImageManager.finalCard),
               width: 40,
+              height: 40,
             ),
             SizedBox(
               height: 7,

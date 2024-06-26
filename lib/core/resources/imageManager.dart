@@ -10,5 +10,5 @@ class ImageManager {
   static const String workCard = "assets/icons/work.svg";
   static const String calendarCard = "assets/icons/calendar.svg";
   static const String shoppingCard = "assets/icons/shopping.svg";
-  static const String finalCard = "assets/icons/done.svg";
+  static const String finalCard = "assets/icons/done.png";
 }
