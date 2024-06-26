@@ -5,11 +5,12 @@
 | Image 1 | Image 2 |
 |---------|---------|
 | ![Image 1](./appPhotos/ToDo2.png) | ![Image 2](./appPhotos/ToDo3.png) |
-<p align="center">
-  <img src="./appPhotos/ToDo4.png" alt="Image 3" />
-</p>
-| Image 1 ||---------|
-| ![Image 1](./appPhotos/ToDo4.png) |
+| Image 3 | Image 4 |
+|---------|---------|
+| ![Image 1](./appPhotos/ToDo4.png) | ![Image 2](./appPhotos/ToDo6.png) |
+
+
+
  ### To Do appliction to manage your tasks
 
 ## Features
