@@ -8,7 +8,7 @@
  ### To Do appliction to manage your tasks
 
 ## Features
-- Comprehensive Task Collections: Manage various categories such as Personal Tasks, Daily Tasks, Work, and Shopping.
+- *Comprehensive* Task Collections: Manage various categories such as Personal Tasks, Daily Tasks, Work, and Shopping.
 - Unlimited Task Addition: Users can add an unlimited number of tasks.
 - Task Deletion: Easily delete tasks when they are no longer needed.
 - User Authentication: Register and login functionality for users.
