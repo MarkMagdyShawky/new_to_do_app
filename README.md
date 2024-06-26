@@ -8,12 +8,12 @@
  ### To Do appliction to manage your tasks
 
 ## Features
-- *Comprehensive* Task Collections: Manage various categories such as Personal Tasks, Daily Tasks, Work, and Shopping.
-- Unlimited Task Addition: Users can add an unlimited number of tasks.
-- Task Deletion: Easily delete tasks when they are no longer needed.
-- User Authentication: Register and login functionality for users.
-- Google Account Integration: Seamless login using personal Google accounts.
-- Completed Tasks: the app have separated part for completed tasks.
+- **Comprehensive Task Collections:** Manage various categories such as Personal Tasks, Daily Tasks, Work, and Shopping.
+- **Unlimited Task Addition:** Users can add an unlimited number of tasks.
+- **Task Deletion:** Easily delete tasks when they are no longer needed.
+- **User Authentication:** Register and login functionality for users.
+- **Google Account Integration:** Seamless login using personal Google accounts.
+- **Completed Tasks:** the app have separated part for completed tasks.
   
 ## How to Use
 - Download and Install: Ensure you have Flutter installed. Clone the repository and install dependencies.
