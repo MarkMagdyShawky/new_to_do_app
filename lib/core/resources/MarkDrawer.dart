@@ -45,7 +45,9 @@ class MarkDrawer extends StatelessWidget {
               "Finished Tasks",
               style: TextStyle(color: MarkPrimaryColor, fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.popAndPushNamed(context, "DoneTasks");
+            },
           ),
           ListTile(
             leading: Icon(

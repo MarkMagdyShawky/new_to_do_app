@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
+import 'package:to_do_app/Features/tasks/widgets/customListTitleForFinishedTasks.dart';
 import 'package:to_do_app/Features/tasks/widgets/customListTitleWidget.dart';
 import 'package:to_do_app/core/resources/MarkDrawer.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
@@ -32,7 +33,7 @@ class _DoneTasks extends State<DoneTasks> {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('DoneTasks').get();
     setState(() {
       data = querySnapshot.docs;
-      dataCheck = List.filled(data.length, false);
+      dataCheck = List.filled(data.length, true);
       isLoading = false;
     });
   }
@@ -74,11 +75,12 @@ class _DoneTasks extends State<DoneTasks> {
                     ),
                     itemCount: data.length,
                     itemBuilder: (context, i) {
-                      return CustomListTitle(
+                      return CustomListTitleForFinishedTasks(
                         handleCheckboxChange: () => _handleCheckboxChange(i),
                         isChecked: dataCheck[i],
                         taskName: data[i]["taskName"],
                         description: data[i]["taskDescription"],
+                        parentCollection: data[i]['oldCollection'],
                         onPressed: () {
                           AwesomeDialog(
                             btnOkIcon: CupertinoIcons.airplane,
@@ -93,14 +95,17 @@ class _DoneTasks extends State<DoneTasks> {
                             },
                             btnOkOnPress: () async {
                               await FirebaseFirestore.instance
+                                  .collection(data[i]['oldCollection'])
+                                  .doc(data[i].id)
+                                  .delete();
+
+                              print(data[i]['oldCollection']);
+
+                              await FirebaseFirestore.instance
                                   .collection('DoneTasks')
                                   .doc(data[i].id)
                                   .delete();
 
-                              await FirebaseFirestore.instance
-                                  .collection(data[i]['oldCollection'])
-                                  .doc(data[i].id)
-                                  .delete();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
