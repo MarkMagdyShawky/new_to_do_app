@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +52,7 @@ class _SignupPageState extends State<SignupPage> {
   void _submitForm() async {
     if (formState.currentState?.validate() ?? false) {
       try {
+        // ignore: unused_local_variable
         final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text,
           password: password.text,

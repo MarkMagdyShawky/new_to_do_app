@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/core/resources/textManager.dart';
 
-import '../../../core/resources/colorManager.dart';
-
 class CustomLoginFooter extends StatelessWidget {
   final String question;
   final String nextPage;

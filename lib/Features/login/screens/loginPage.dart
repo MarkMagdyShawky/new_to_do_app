@@ -2,11 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:to_do_app/Features/login/widgets/customGoogleBtn.dart';
 import 'package:to_do_app/Features/login/widgets/customLoginHeader.dart';
-import 'package:to_do_app/Features/onboarding/widgets/customLargeButton.dart';
 import 'package:to_do_app/Features/singup/widgets/customAwesomeDialog.dart';
 import 'package:to_do_app/core/resources/imageManager.dart';
 import 'package:to_do_app/core/resources/stringManager.dart';
@@ -49,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   void _submitForm() async {
     if (formState.currentState?.validate() ?? false) {
       try {
+        // ignore: unused_local_variable
         final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email.text,
           password: password.text,

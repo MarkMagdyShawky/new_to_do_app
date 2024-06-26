@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/core/resources/stringManager.dart';
 import 'package:to_do_app/core/resources/textManager.dart';
 
-import '../../../core/resources/colorManager.dart';
-
 class HomePageWelcome extends StatelessWidget {
   const HomePageWelcome({super.key});
 
