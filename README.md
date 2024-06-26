@@ -4,7 +4,7 @@
 
 | Image 1 | Image 2 |
 |---------|---------|
-| ![Image 1](./appPhotos/ToDo2.png) | ![Image 2](./appPhotos/ToDo1.png) |
+| ![Image 1](./appPhotos/ToDo2.png) | ![Image 2](./appPhotos/ToDo3.png) |
  ### To Do appliction to manage your tasks
 
 ## Features
