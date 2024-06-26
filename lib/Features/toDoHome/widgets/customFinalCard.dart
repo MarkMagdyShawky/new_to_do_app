@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:to_do_app/Features/tasks/screens/doneTasks.dart';
+import 'package:to_do_app/Features/tasks/finishedTasks/sereens/doneTasks.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
 import 'package:to_do_app/core/resources/imageManager.dart';
 

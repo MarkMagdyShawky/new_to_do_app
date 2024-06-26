@@ -24,7 +24,7 @@ class CustomListTitleForFinishedTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 254, 231),
+        color: Color.fromARGB(255, 255, 255, 245),
         border: Border.all(color: MarkPrimaryColor),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -37,6 +37,9 @@ class CustomListTitleForFinishedTasks extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 DarkTextManager(text: taskName, fontSize: 18),
+                SizedBox(
+                  height: 5,
+                ),
                 Text(
                   description,
                 ),
@@ -46,18 +49,12 @@ class CustomListTitleForFinishedTasks extends StatelessWidget {
           //Right part:
 
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 children: <Widget>[
                   Checkbox(
                     value: isChecked,
-                    onChanged: (bool? value) {
-                      if (handleCheckboxChange != null) {
-                        handleCheckboxChange!();
-                      }
-                    },
+                    onChanged: (value) {},
                     activeColor: MarkPrimaryColor,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
