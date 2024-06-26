@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/tasks/widgets/customFloatingActionButton.dart';
-import 'package:to_do_app/Features/tasks/widgets/customListTitleForFinishedTasks.dart';
+import 'package:to_do_app/Features/tasks/finishedTasks/widgets/customListTitleForFinishedTasks.dart';
 import 'package:to_do_app/core/resources/MarkDrawer.dart';
 import 'package:to_do_app/core/resources/colorManager.dart';
 import 'package:to_do_app/core/resources/textManager.dart';
