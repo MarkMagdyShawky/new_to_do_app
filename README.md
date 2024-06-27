@@ -12,7 +12,7 @@
 
 
 
- ### To Do appliction to manage your tasks
+ ### To Do appliction for managing your tasks
 
 ## Features
 - **Comprehensive Task Collections:** Manage various categories such as Personal Tasks, Daily Tasks, Work, and Shopping.
