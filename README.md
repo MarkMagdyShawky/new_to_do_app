@@ -42,3 +42,7 @@
 - **Task Reminders:** Implement reminders and notifications for pending tasks.
 - **Dark Mode:** Introduce a dark mode for better user experience.
 - **Task Sharing:** Allow users to share tasks with others.
+
+## Contributors
+- __Mark Magdy__
+   
